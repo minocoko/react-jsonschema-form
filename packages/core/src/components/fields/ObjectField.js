@@ -31,21 +31,17 @@ function DefaultObjectFieldTemplate(props) {
   const { TitleField, DescriptionField } = props;
   return (
     <fieldset id={props.idSchema.$id}>
-      {(props.uiSchema["ui:title"] || props.title) && (
-        <TitleField
-          id={`${props.idSchema.$id}__title`}
-          title={props.title || props.uiSchema["ui:title"]}
-          required={props.required}
-          formContext={props.formContext}
-        />
-      )}
-      {props.description && (
-        <DescriptionField
-          id={`${props.idSchema.$id}__description`}
-          description={props.description}
-          formContext={props.formContext}
-        />
-      )}
+      <TitleField
+        id={`${props.idSchema.$id}__title`}
+        title={props.uiSchema["ui:title"]}
+        required={props.required}
+        formContext={props.formContext}
+      />
+      <DescriptionField
+        id={`${props.idSchema.$id}__description`}
+        description={props.description}
+        formContext={props.formContext}
+      />
       {props.properties.map(prop => prop.content)}
       {canExpand() && (
         <AddButton
@@ -212,7 +208,13 @@ class ObjectField extends Component {
 
     const { rootSchema, fields, formContext } = registry;
     const { SchemaField, TitleField, DescriptionField } = fields;
+<<<<<<< HEAD:packages/core/src/components/fields/ObjectField.js
     const schema = retrieveSchema(this.props.schema, rootSchema, formData);
+=======
+    const schema = retrieveSchema(this.props.schema, definitions, formData);
+
+    // If this schema has a title defined, but the user has set a new key/label, retain their input.
+>>>>>>> CMUFC-777 [react-jsonschema-form] Only use ui:title:src/components/fields/ObjectField.js
 
     const title = schema.title === undefined ? name : schema.title;
     const description = uiSchema["ui:description"] || schema.description;
@@ -238,7 +240,7 @@ class ObjectField extends Component {
       DefaultObjectFieldTemplate;
 
     const templateProps = {
-      title: uiSchema["ui:title"] || title,
+      title: uiSchema["ui:title"],
       description,
       TitleField,
       DescriptionField,
