@@ -1,8 +1,14 @@
 {
+<<<<<<< HEAD
   "name": "react-jsonschema-form",
   "version": "2.0.0-alpha.1",
   "private": true,
   "description": "monorepo for react-jsonschema-form and its themes",
+=======
+  "name": "@minocoko/react-jsonschema-form",
+  "version": "1.8.5",
+  "description": "A simple React component capable of building HTML forms out of a JSON schema.",
+>>>>>>> v1.8.5
   "scripts": {
     "postinstall": "lerna bootstrap",
     "bootstrap": "lerna bootstrap",
