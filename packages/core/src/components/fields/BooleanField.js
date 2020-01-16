@@ -25,7 +25,10 @@ function BooleanField(props) {
     onBlur,
     rawErrors,
   } = props;
-  const title = uiSchema["ui:title"];
+  const title =
+    uiSchema["ui:title"] !== null && uiSchema["ui:title"] !== undefined
+      ? uiSchema["ui:title"]
+      : schema.title;
   const { widgets, formContext, fields } = registry;
   const { widget = "checkbox", ...options } = getUiOptions(uiSchema);
   const Widget = getWidget(schema, widget, widgets);
