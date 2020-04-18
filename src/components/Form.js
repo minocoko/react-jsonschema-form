@@ -104,7 +104,9 @@ export default class Form extends Component {
     formData,
     schema = this.props.schema,
     additionalMetaSchemas = this.props.additionalMetaSchemas,
-    customFormats = this.props.customFormats
+    customFormats = this.props.customFormats,
+    customKeywords = this.props.customKeywords,
+    ajvOptions = this.props.ajvOptions
   ) {
     const { validate, transformErrors } = this.props;
     const { definitions } = this.getRegistry();
@@ -115,7 +117,9 @@ export default class Form extends Component {
       validate,
       transformErrors,
       additionalMetaSchemas,
-      customFormats
+      customFormats,
+      customKeywords,
+      ajvOptions
     );
   }
 

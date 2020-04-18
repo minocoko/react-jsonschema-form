@@ -4,17 +4,20 @@ let ajv = createAjvInstance();
 import { deepEquals, getDefaultFormState } from "./utils";
 
 let formerCustomFormats = null;
+let formerCustomKeywords = null;
 let formerMetaSchema = null;
+let formerAjvOptions = null;
 
 import { isObject, mergeObjects } from "./utils";
 
-function createAjvInstance() {
+function createAjvInstance(options) {
   const ajv = new Ajv({
     errorDataPath: "property",
     allErrors: true,
     multipleOfPrecision: 8,
     schemaId: "auto",
     unknownFormats: "ignore",
+    ...options
   });
 
   // add custom formats
@@ -170,7 +173,9 @@ export default function validateFormData(
   customValidate,
   transformErrors,
   additionalMetaSchemas = [],
-  customFormats = {}
+  customFormats = {},
+  customKeywords = {},
+  ajvOptions = {},
 ) {
   // Include form data with undefined values, which is required for validation.
   const { definitions } = schema;
@@ -178,9 +183,11 @@ export default function validateFormData(
 
   const newMetaSchemas = !deepEquals(formerMetaSchema, additionalMetaSchemas);
   const newFormats = !deepEquals(formerCustomFormats, customFormats);
+  const newKeywords = !deepEquals(formerCustomKeywords, customKeywords);
+  const newAjvOptions = !deepEquals(formerAjvOptions, ajvOptions);
 
-  if (newMetaSchemas || newFormats) {
-    ajv = createAjvInstance();
+  if (newMetaSchemas || newFormats || newKeywords || newAjvOptions) {
+    ajv = createAjvInstance(ajvOptions);
   }
 
   // add more schemas to validate against
@@ -200,6 +207,15 @@ export default function validateFormData(
     });
 
     formerCustomFormats = customFormats;
+  }
+
+  // add more custom keywords to validate against
+  if (customKeywords && newKeywords && isObject(customKeywords)) {
+    Object.keys(customKeywords).forEach(keyword => {
+      ajv.addKeyword(keyword, customKeywords[keyword]);
+    });
+
+    formerCustomKeywords = customKeywords;
   }
 
   let validationError = null;
