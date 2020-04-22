@@ -17,7 +17,7 @@ function createAjvInstance(options) {
     multipleOfPrecision: 8,
     schemaId: "auto",
     unknownFormats: "ignore",
-    ...options
+    ...options,
   });
 
   // add custom formats
@@ -175,7 +175,7 @@ export default function validateFormData(
   additionalMetaSchemas = [],
   customFormats = {},
   customKeywords = {},
-  ajvOptions = {},
+  ajvOptions = {}
 ) {
   // Include form data with undefined values, which is required for validation.
   const { definitions } = schema;
@@ -216,6 +216,10 @@ export default function validateFormData(
     });
 
     formerCustomKeywords = customKeywords;
+  }
+
+  if (newAjvOptions) {
+    formerAjvOptions = ajvOptions;
   }
 
   let validationError = null;
