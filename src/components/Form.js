@@ -106,7 +106,8 @@ export default class Form extends Component {
     additionalMetaSchemas = this.props.additionalMetaSchemas,
     customFormats = this.props.customFormats,
     customKeywords = this.props.customKeywords,
-    ajvOptions = this.props.ajvOptions
+    ajvOptions = this.props.ajvOptions,
+    formContext = this.props.formContext
   ) {
     const { validate, transformErrors } = this.props;
     const { definitions } = this.getRegistry();
@@ -119,7 +120,8 @@ export default class Form extends Component {
       additionalMetaSchemas,
       customFormats,
       customKeywords,
-      ajvOptions
+      ajvOptions,
+      formContext
     );
   }
 

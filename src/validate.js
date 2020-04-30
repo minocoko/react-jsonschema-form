@@ -175,7 +175,8 @@ export default function validateFormData(
   additionalMetaSchemas = [],
   customFormats = {},
   customKeywords = {},
-  ajvOptions = {}
+  ajvOptions = {},
+  formContext = {}
 ) {
   // Include form data with undefined values, which is required for validation.
   const { definitions } = schema;
@@ -223,16 +224,19 @@ export default function validateFormData(
   }
 
   let validationError = null;
+  let validate = {};
+
   try {
-    ajv.validate(schema, formData);
+    validate = ajv.compile(schema);
+    validate.call(formContext, formData);
   } catch (err) {
     validationError = err;
   }
 
-  let errors = transformAjvErrors(ajv.errors);
+  let errors = transformAjvErrors(validate.errors);
   // Clear errors to prevent persistent errors, see #1104
 
-  ajv.errors = null;
+  validate.errors = null;
 
   const noProperMetaSchema =
     validationError &&
