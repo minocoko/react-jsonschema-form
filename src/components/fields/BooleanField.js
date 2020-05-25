@@ -24,6 +24,7 @@ function BooleanField(props) {
     onFocus,
     onBlur,
     rawErrors,
+    parentFormData,
   } = props;
   const title =
     uiSchema["ui:title"] !== null && uiSchema["ui:title"] !== undefined
@@ -70,6 +71,7 @@ function BooleanField(props) {
       formContext={formContext}
       autofocus={autofocus}
       rawErrors={rawErrors}
+      parentFormData={parentFormData}
     />
   );
 }
