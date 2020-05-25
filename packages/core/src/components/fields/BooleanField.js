@@ -24,6 +24,7 @@ function BooleanField(props) {
     onFocus,
     onBlur,
     rawErrors,
+    parentFormData,
   } = props;
   const title =
     uiSchema["ui:title"] !== null && uiSchema["ui:title"] !== undefined
@@ -70,7 +71,11 @@ function BooleanField(props) {
       formContext={formContext}
       autofocus={autofocus}
       rawErrors={rawErrors}
+<<<<<<< HEAD:packages/core/src/components/fields/BooleanField.js
       DescriptionField={fields.DescriptionField}
+=======
+      parentFormData={parentFormData}
+>>>>>>> CMUFC-2177 To pass objectFiledFormData to widget. (#6):src/components/fields/BooleanField.js
     />
   );
 }

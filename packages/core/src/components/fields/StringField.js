@@ -26,6 +26,7 @@ function StringField(props) {
     onFocus,
     registry = getDefaultRegistry(),
     rawErrors,
+    parentFormData,
   } = props;
   const { format } = schema;
   const title =
@@ -60,6 +61,7 @@ function StringField(props) {
       registry={registry}
       placeholder={placeholder}
       rawErrors={rawErrors}
+      parentFormData={parentFormData}
     />
   );
 }
