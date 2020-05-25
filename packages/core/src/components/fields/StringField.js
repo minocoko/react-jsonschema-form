@@ -45,7 +45,7 @@ function StringField(props) {
   const Widget = getWidget(schema, widget, widgets);
   return (
     <Widget
-      options={{ ...options, enumOptions }}
+      options={{ ...options, enumOptions, parentFormData }}
       schema={schema}
       id={idSchema && idSchema.$id}
       label={title === undefined ? name : title}
@@ -61,7 +61,6 @@ function StringField(props) {
       registry={registry}
       placeholder={placeholder}
       rawErrors={rawErrors}
-      parentFormData={parentFormData}
     />
   );
 }

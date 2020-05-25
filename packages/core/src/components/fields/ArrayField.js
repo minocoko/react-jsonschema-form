@@ -290,11 +290,7 @@ class ArrayField extends Component {
     if (isFixedItems(schema) && allowAdditionalItems(schema)) {
       itemSchema = schema.additionalItems;
     }
-    let newFormDataRow = getDefaultFormState(
-      itemSchema,
-      undefined,
-      rootSchema
-    );
+    let newFormDataRow = getDefaultFormState(itemSchema, undefined, rootSchema);
     const { maxAddItems, initialOnAdd } = getUiOptions(uiSchema);
     if (maxAddItems) {
       newFormDataRow = { ...newFormDataRow, [STATUS_FIELD]: STATUS_NEW };

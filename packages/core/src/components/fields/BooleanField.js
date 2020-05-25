@@ -56,7 +56,7 @@ function BooleanField(props) {
 
   return (
     <Widget
-      options={{ ...options, enumOptions }}
+      options={{ ...options, enumOptions, parentFormData }}
       schema={schema}
       id={idSchema && idSchema.$id}
       onChange={onChange}
@@ -71,11 +71,7 @@ function BooleanField(props) {
       formContext={formContext}
       autofocus={autofocus}
       rawErrors={rawErrors}
-<<<<<<< HEAD:packages/core/src/components/fields/BooleanField.js
       DescriptionField={fields.DescriptionField}
-=======
-      parentFormData={parentFormData}
->>>>>>> CMUFC-2177 To pass objectFiledFormData to widget. (#6):src/components/fields/BooleanField.js
     />
   );
 }

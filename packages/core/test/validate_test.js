@@ -270,13 +270,14 @@ describe("Validation", () => {
 
       beforeEach(() => {
         const customEqualValidate = (
-          [equalToProperty, message = 'Is not validate input'] = [],
+          // eslint-disable-next-line
+          [equalToProperty, message = "Is not validate input"] = [],
           data,
           parentSchema,
           dataPath,
           parentData,
           parentDataProperty,
-          rootData,
+          rootData
         ) => {
           if (equalToProperty) {
             const isValid = rootData[equalToProperty] === data;
@@ -287,26 +288,38 @@ describe("Validation", () => {
         };
 
         const customKeywords = {
-          'equal': {
+          equal: {
             validate: customEqualValidate,
             errors: true,
-          }
+          },
         };
 
         const formData = { pass1: "a", pass2: "b" };
-        const result = validateFormData(formData, schema, undefined, undefined, undefined, undefined, customKeywords);
+        const result = validateFormData(
+          formData,
+          schema,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          customKeywords
+        );
         errors = result.errors;
         errorSchema = result.errorSchema;
       });
 
       it("should return an error list", () => {
         expect(errors).to.have.length.of(1);
-        expect(errors[0].stack).eql(".pass1 should pass \"equal\" keyword validation");
+        expect(errors[0].stack).eql(
+          '.pass1 should pass "equal" keyword validation'
+        );
       });
 
       it("should return an errorSchema", () => {
         expect(errorSchema.pass1.__errors).to.have.length.of(1);
-        expect(errorSchema.pass1.__errors[0]).eql("should pass \"equal\" keyword validation");
+        expect(errorSchema.pass1.__errors[0]).eql(
+          'should pass "equal" keyword validation'
+        );
       });
     });
 
@@ -801,14 +814,14 @@ describe("Validation", () => {
         uiSchema,
         formContext: { className },
       }) => (
-          <div>
-            <div className="CustomErrorList">{errors.length} custom</div>
-            <div className={"ErrorSchema"}>{errorSchema.__errors[0]}</div>
-            <div className={"Schema"}>{schema.type}</div>
-            <div className={"UiSchema"}>{uiSchema.foo}</div>
-            <div className={className} />
-          </div>
-        );
+        <div>
+          <div className="CustomErrorList">{errors.length} custom</div>
+          <div className={"ErrorSchema"}>{errorSchema.__errors[0]}</div>
+          <div className={"Schema"}>{schema.type}</div>
+          <div className={"UiSchema"}>{uiSchema.foo}</div>
+          <div className={className} />
+        </div>
+      );
 
       it("should use CustomErrorList", () => {
         const { node } = createFormComponent({
@@ -906,16 +919,25 @@ describe("Custom ajv config", () => {
         properties: {
           pass1: { type: "string" },
           pass2: { type: "string" },
-        }
+        },
       },
-    }
+    },
   };
 
   beforeEach(() => {
     const formData = { pass: null };
-    const result = validateFormData(formData, schema, undefined, undefined, undefined, undefined, undefined, {
-      nullable: true,
-    });
+    const result = validateFormData(
+      formData,
+      schema,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      {
+        nullable: true,
+      }
+    );
     errors = result.errors;
     errorSchema = result.errorSchema;
   });

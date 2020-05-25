@@ -604,6 +604,9 @@ describe("ObjectField", () => {
             type: "string",
           },
         },
+        uiSchema: {
+          "ui:title": "Object title",
+        },
         formData: { "Custom title": 1 },
       });
 
