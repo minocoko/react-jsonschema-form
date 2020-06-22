@@ -19,6 +19,9 @@ import {
 } from "../../utils";
 import shortid from "shortid";
 
+const STATUS_FIELD = "{status}";
+const STATUS_NEW = "new";
+
 function ArrayFieldTitle({ TitleField, idSchema, title, required }) {
   if (!title) {
     return null;
@@ -103,13 +106,18 @@ function DefaultArrayItem(props) {
 }
 
 function DefaultFixedArrayFieldTemplate(props) {
+  const title =
+    props.uiSchema["ui:title"] !== null &&
+    props.uiSchema["ui:title"] !== undefined
+      ? props.uiSchema["ui:title"]
+      : props.title;
   return (
     <fieldset className={props.className} id={props.idSchema.$id}>
       <ArrayFieldTitle
         key={`array-field-title-${props.idSchema.$id}`}
         TitleField={props.TitleField}
         idSchema={props.idSchema}
-        title={props.uiSchema["ui:title"] || props.title}
+        title={title}
         required={props.required}
       />
 
@@ -139,13 +147,18 @@ function DefaultFixedArrayFieldTemplate(props) {
 }
 
 function DefaultNormalArrayFieldTemplate(props) {
+  const title =
+    props.uiSchema["ui:title"] !== null &&
+    props.uiSchema["ui:title"] !== undefined
+      ? props.uiSchema["ui:title"]
+      : props.title;
   return (
     <fieldset className={props.className} id={props.idSchema.$id}>
       <ArrayFieldTitle
         key={`array-field-title-${props.idSchema.$id}`}
         TitleField={props.TitleField}
         idSchema={props.idSchema}
-        title={props.uiSchema["ui:title"] || props.title}
+        title={title}
         required={props.required}
       />
 
@@ -224,7 +237,7 @@ class ArrayField extends Component {
         updatedKeyedFormData: false,
       };
     }
-    const nextFormData = nextProps.formData;
+    const nextFormData = nextProps.formData || [];
     const previousKeyedFormData = prevState.keyedFormData;
     const newKeyedFormData =
       nextFormData.length === previousKeyedFormData.length
@@ -271,13 +284,22 @@ class ArrayField extends Component {
   }
 
   _getNewFormDataRow = () => {
-    const { schema, registry = getDefaultRegistry() } = this.props;
+    const { schema, uiSchema, registry = getDefaultRegistry() } = this.props;
     const { rootSchema } = registry;
     let itemSchema = schema.items;
     if (isFixedItems(schema) && allowAdditionalItems(schema)) {
       itemSchema = schema.additionalItems;
     }
-    return getDefaultFormState(itemSchema, undefined, rootSchema);
+    let newFormDataRow = getDefaultFormState(itemSchema, undefined, rootSchema);
+    const { maxAddItems, initialOnAdd } = getUiOptions(uiSchema);
+    if (maxAddItems) {
+      newFormDataRow = { ...newFormDataRow, [STATUS_FIELD]: STATUS_NEW };
+    }
+    if (initialOnAdd) {
+      newFormDataRow = { ...newFormDataRow, ...initialOnAdd };
+    }
+
+    return newFormDataRow;
   };
 
   onAddClick = event => {
