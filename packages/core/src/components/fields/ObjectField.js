@@ -12,12 +12,17 @@ import {
 
 function DefaultObjectFieldTemplate(props) {
   const { TitleField, DescriptionField } = props;
+  const title =
+    props.uiSchema["ui:title"] !== null &&
+    props.uiSchema["ui:title"] !== undefined
+      ? props.uiSchema["ui:title"]
+      : props.title;
   return (
     <fieldset id={props.idSchema.$id}>
-      {(props.uiSchema["ui:title"] || props.title) && (
+      {title && (
         <TitleField
           id={`${props.idSchema.$id}__title`}
-          title={props.title || props.uiSchema["ui:title"]}
+          title={title}
           required={props.required}
           formContext={props.formContext}
         />
@@ -197,7 +202,18 @@ class ObjectField extends Component {
     const { SchemaField, TitleField, DescriptionField } = fields;
     const schema = retrieveSchema(this.props.schema, rootSchema, formData);
 
-    const title = schema.title === undefined ? name : schema.title;
+    let title;
+    if (this.state.wasPropertyKeyModified) {
+      title = name;
+    } else {
+      title = schema.title === undefined ? name : schema.title;
+    }
+
+    title =
+      uiSchema["ui:title"] !== null && uiSchema["ui:title"] !== undefined
+        ? uiSchema["ui:title"]
+        : title;
+
     const description = uiSchema["ui:description"] || schema.description;
     let orderedProperties;
     try {
@@ -221,7 +237,7 @@ class ObjectField extends Component {
       DefaultObjectFieldTemplate;
 
     const templateProps = {
-      title: uiSchema["ui:title"] || title,
+      title,
       description,
       TitleField,
       DescriptionField,
@@ -245,6 +261,7 @@ class ObjectField extends Component {
               idSchema={idSchema[name]}
               idPrefix={idPrefix}
               formData={(formData || {})[name]}
+              parentFormData={formData || {}}
               wasPropertyKeyModified={this.state.wasPropertyKeyModified}
               onKeyChange={this.onKeyChange(name)}
               onChange={this.onPropertyChange(

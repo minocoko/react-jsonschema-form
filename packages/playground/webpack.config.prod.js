@@ -13,7 +13,7 @@ module.exports = {
   },
   plugins: [
     new MonacoWebpackPlugin({
-      languages: ['json']
+      languages: ['json'],
     }),
     new webpack.DefinePlugin({
       "process.env": {

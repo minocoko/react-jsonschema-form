@@ -26,8 +26,13 @@ function StringField(props) {
     onFocus,
     registry = getDefaultRegistry(),
     rawErrors,
+    parentFormData,
   } = props;
-  const { title, format } = schema;
+  const { format } = schema;
+  const title =
+    uiSchema["ui:title"] !== null && uiSchema["ui:title"] !== undefined
+      ? uiSchema["ui:title"]
+      : schema.title;
   const { widgets, formContext } = registry;
   const enumOptions = isSelect(schema) && optionsList(schema);
   let defaultWidget = enumOptions ? "select" : "text";
@@ -40,7 +45,7 @@ function StringField(props) {
   const Widget = getWidget(schema, widget, widgets);
   return (
     <Widget
-      options={{ ...options, enumOptions }}
+      options={{ ...options, enumOptions, parentFormData }}
       schema={schema}
       uiSchema={uiSchema}
       id={idSchema && idSchema.$id}

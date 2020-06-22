@@ -24,8 +24,12 @@ function BooleanField(props) {
     onFocus,
     onBlur,
     rawErrors,
+    parentFormData,
   } = props;
-  const { title } = schema;
+  const title =
+    uiSchema["ui:title"] !== null && uiSchema["ui:title"] !== undefined
+      ? uiSchema["ui:title"]
+      : schema.title;
   const { widgets, formContext, fields } = registry;
   const { widget = "checkbox", ...options } = getUiOptions(uiSchema);
   const Widget = getWidget(schema, widget, widgets);
@@ -52,7 +56,7 @@ function BooleanField(props) {
 
   return (
     <Widget
-      options={{ ...options, enumOptions }}
+      options={{ ...options, enumOptions, parentFormData }}
       schema={schema}
       id={idSchema && idSchema.$id}
       onChange={onChange}
