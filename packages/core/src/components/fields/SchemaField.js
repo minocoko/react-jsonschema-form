@@ -304,7 +304,10 @@ function SchemaFieldRender(props) {
   if (wasPropertyKeyModified) {
     label = name;
   } else {
-    label = uiSchema["ui:title"] || props.schema.title || schema.title || name;
+    label =
+      uiSchema["ui:title"] !== null && uiSchema["ui:title"] !== undefined
+        ? uiSchema["ui:title"]
+        : props.schema.title || schema.title || name;
   }
 
   const description =

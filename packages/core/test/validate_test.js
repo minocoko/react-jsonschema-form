@@ -256,6 +256,73 @@ describe("Validation", () => {
       });
     });
 
+    describe("Custom keyword function", () => {
+      let errors, errorSchema;
+
+      const schema = {
+        type: "object",
+        required: ["pass1", "pass2"],
+        properties: {
+          pass1: { type: "string", equal: ["pass2"] },
+          pass2: { type: "string" },
+        },
+      };
+
+      beforeEach(() => {
+        const customEqualValidate = (
+          // eslint-disable-next-line
+          [equalToProperty, message = "Is not validate input"] = [],
+          data,
+          parentSchema,
+          dataPath,
+          parentData,
+          parentDataProperty,
+          rootData
+        ) => {
+          if (equalToProperty) {
+            const isValid = rootData[equalToProperty] === data;
+            return isValid;
+          }
+
+          return true;
+        };
+
+        const customKeywords = {
+          equal: {
+            validate: customEqualValidate,
+            errors: true,
+          },
+        };
+
+        const formData = { pass1: "a", pass2: "b" };
+        const result = validateFormData(
+          formData,
+          schema,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          customKeywords
+        );
+        errors = result.errors;
+        errorSchema = result.errorSchema;
+      });
+
+      it("should return an error list", () => {
+        expect(errors).to.have.length.of(1);
+        expect(errors[0].stack).eql(
+          '.pass1 should pass "equal" keyword validation'
+        );
+      });
+
+      it("should return an errorSchema", () => {
+        expect(errorSchema.pass1.__errors).to.have.length.of(1);
+        expect(errorSchema.pass1.__errors[0]).eql(
+          'should pass "equal" keyword validation'
+        );
+      });
+    });
+
     describe("Data-Url validation", () => {
       const schema = {
         type: "object",
@@ -837,5 +904,49 @@ describe("Validation", () => {
         sinon.assert.notCalled(onError);
       });
     });
+  });
+});
+
+describe("Custom ajv config", () => {
+  let errors, errorSchema;
+
+  const schema = {
+    type: "object",
+    properties: {
+      pass: {
+        type: "object",
+        nullable: true,
+        properties: {
+          pass1: { type: "string" },
+          pass2: { type: "string" },
+        },
+      },
+    },
+  };
+
+  beforeEach(() => {
+    const formData = { pass: null };
+    const result = validateFormData(
+      formData,
+      schema,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      {
+        nullable: true,
+      }
+    );
+    errors = result.errors;
+    errorSchema = result.errorSchema;
+  });
+
+  it("shouldn't return an error list", () => {
+    expect(errors).to.have.length.of(0);
+  });
+
+  it("should return an errorSchema", () => {
+    expect(errorSchema.pass).to.be.equal(undefined);
   });
 });
