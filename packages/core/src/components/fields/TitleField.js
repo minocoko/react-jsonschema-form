@@ -5,6 +5,10 @@ const REQUIRED_FIELD_SYMBOL = "*";
 
 function TitleField(props) {
   const { id, title, required } = props;
+  if (!title) {
+    return null;
+  }
+
   return (
     <legend id={id}>
       {title}
