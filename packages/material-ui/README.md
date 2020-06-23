@@ -43,10 +43,10 @@ Exports `material-ui` theme, fields and widgets for `react-jsonschema-form`.
 
 - `@material-ui/core >= 4.2.0` ([in 4.2.0, the `slider` component was added to the core](https://github.com/mui-org/material-ui/pull/16416))
 - `@material-ui/icons`
-- `@rjsf/core >= 2.0.0`
+- `@minocoko/rjsf-core >= 2.0.0`
 
 ```bash
-yarn add @material-ui/core @material-ui/icons @rjsf/core
+yarn add @material-ui/core @material-ui/icons @minocoko/rjsf-core
 ```
 
 ### Installation
@@ -64,7 +64,7 @@ import Form from '@rjsf/material-ui';
 or
 
 ```js
-import { withTheme } from '@rjsf/core';
+import { withTheme } from '@minocoko/rjsf-core';
 import { Theme as MuiTheme } from '@rjsf/material-ui';
 
 const Form = withTheme(MuiTheme);

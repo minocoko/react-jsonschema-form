@@ -3,7 +3,7 @@ import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-import { WidgetProps } from "@rjsf/core";
+import { WidgetProps } from "@minocoko/rjsf-core";
 
 const CheckboxWidget = (props: WidgetProps) => {
   const {

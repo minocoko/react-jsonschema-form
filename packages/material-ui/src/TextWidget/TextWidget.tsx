@@ -4,7 +4,7 @@ import TextField, {
   StandardTextFieldProps as TextFieldProps,
 } from "@material-ui/core/TextField";
 
-import { WidgetProps } from "@rjsf/core";
+import { WidgetProps } from "@minocoko/rjsf-core";
 
 export type TextWidgetProps = WidgetProps & TextFieldProps;
 
