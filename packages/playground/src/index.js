@@ -1,5 +1,5 @@
 import React from "react";
-import { Theme as MuiTheme } from "@rjsf/material-ui";
+import { Theme as MuiTheme } from "@minocoko/rjsf-material-ui";
 import { Theme as FluentUITheme } from "@rjsf/fluent-ui";
 import { Theme as SuiTheme } from "@rjsf/semantic-ui";
 import { Theme as AntdTheme } from "@rjsf/antd";

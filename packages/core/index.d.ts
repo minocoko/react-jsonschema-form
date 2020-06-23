@@ -1,6 +1,6 @@
-// Originally from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/@rjsf/core/index.d.ts
+// Originally from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/@minocoko/rjsf-core/index.d.ts
 
-declare module '@rjsf/core' {
+declare module '@minocoko/rjsf-core' {
     import * as React from 'react';
     import { JSONSchema7, JSONSchema7Definition, JSONSchema7Type, JSONSchema7TypeName } from 'json-schema';
 
@@ -420,9 +420,9 @@ declare module '@rjsf/core' {
     }
 }
 
-declare module '@rjsf/core/lib/components/fields/SchemaField' {
+declare module '@minocoko/rjsf-core/lib/components/fields/SchemaField' {
     import { JSONSchema7 } from 'json-schema';
-    import { FieldProps, UiSchema, IdSchema, FormValidation } from '@rjsf/core';
+    import { FieldProps, UiSchema, IdSchema, FormValidation } from '@minocoko/rjsf-core';
 
     export type SchemaFieldProps<T = any> = Pick<
         FieldProps<T>,
@@ -432,9 +432,9 @@ declare module '@rjsf/core/lib/components/fields/SchemaField' {
     export default class SchemaField extends React.Component<SchemaFieldProps> {}
 }
 
-declare module '@rjsf/core/lib/validate' {
+declare module '@minocoko/rjsf-core/lib/validate' {
     import { JSONSchema7Definition } from 'json-schema';
-    import { AjvError, ErrorSchema, FormProps } from '@rjsf/core';
+    import { AjvError, ErrorSchema, FormProps } from '@minocoko/rjsf-core';
 
     export default function validateFormData<T = any>(
         formData: T,
