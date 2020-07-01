@@ -1,6 +1,6 @@
 {
   "name": "@rjsf/fluent-ui",
-  "version": "2.2.1-beta.0",
+  "version": "2.2.1-beta.1",
   "main": "dist/index.js",
   "module": "dist/rjsf-fluent-ui.esm.js",
   "typings": "dist/index.d.ts",
@@ -69,5 +69,6 @@
   "dependencies": {
     "lodash": "^4.17.15",
     "lodash-es": "^4.17.15"
-  }
+  },
+  "gitHead": "94bf59a30b4548585a35c0b8b72a41a922bdf741"
 }

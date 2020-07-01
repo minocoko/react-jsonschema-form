@@ -1,6 +1,6 @@
 {
   "name": "@minocoko/rjsf-material-ui",
-  "version": "2.2.1-beta.0",
+  "version": "2.2.1-beta.1",
   "main": "dist/index.js",
   "module": "dist/rjsf-material-ui.esm.js",
   "typings": "dist/index.d.ts",
@@ -29,7 +29,7 @@
     "@babel/preset-react": "^7.0.0",
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
-    "@minocoko/rjsf-core": "^2.2.1-beta.0",
+    "@minocoko/rjsf-core": "^2.2.1-beta.1",
     "@types/jest": "^24.0.15",
     "@types/json-schema": "^7.0.3",
     "@types/react": "^16.9.23",
@@ -67,5 +67,6 @@
     "type": "git",
     "url": "git+https://github.com/rjsf-team/react-jsonschema-form.git"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "gitHead": "94bf59a30b4548585a35c0b8b72a41a922bdf741"
 }
