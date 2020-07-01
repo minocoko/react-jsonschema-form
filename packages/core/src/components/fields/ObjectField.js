@@ -98,7 +98,17 @@ class ObjectField extends Component {
         // set empty values to the empty string.
         value = "";
       }
-      const newFormData = { ...this.props.formData, [name]: value };
+
+      let newValue = value;
+      if (
+        this.uiSchema["ui:options"] &&
+        typeof this.uiSchema["ui:options"].onChange === "function"
+      ) {
+        // only handle onChange function
+        newValue = this.uiSchema["ui:options"].onChange(value);
+      }
+
+      const newFormData = { ...this.props.formData, [name]: newValue };
       this.props.onChange(
         newFormData,
         errorSchema &&
