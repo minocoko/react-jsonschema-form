@@ -107,7 +107,7 @@ class ObjectField extends Component {
         typeof this.props.uiSchema[name]["ui:options"].onChange === "function"
       ) {
         // only handle onChange function
-        newValue = this.props.uiSchema["ui:options"].onChange(value);
+        this.props.uiSchema[name]["ui:options"].onChange.onChange(value);
       }
 
       const newFormData = { ...this.props.formData, [name]: newValue };
