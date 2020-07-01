@@ -101,8 +101,10 @@ class ObjectField extends Component {
 
       let newValue = value;
       if (
-        this.props.uiSchema["ui:options"] &&
-        typeof this.props.uiSchema["ui:options"].onChange === "function"
+        this.props.uiSchema[name] &&
+        this.props.uiSchema[name]["ui:options"] &&
+        this.props.uiSchema[name]["ui:options"].onChange &&
+        typeof this.props.uiSchema[name]["ui:options"].onChange === "function"
       ) {
         // only handle onChange function
         newValue = this.props.uiSchema["ui:options"].onChange(value);
