@@ -1,5 +1,5 @@
 {
-  "name": "@rjsf/fluent-ui",
+  "name": "@minocoko/rjsf-fluent-ui",
   "version": "2.2.0",
   "main": "dist/index.js",
   "module": "dist/rjsf-fluent-ui.esm.js",
