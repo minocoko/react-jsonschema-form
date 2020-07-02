@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { utils } from '@rjsf/core';
+import { utils } from '@minocoko/rjsf-core';
 import { Button, Col, Form, Input, Row } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 

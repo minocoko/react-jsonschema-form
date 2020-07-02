@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FieldProps } from "@rjsf/core";
+import { FieldProps } from "@minocoko/rjsf-core";
 
 import { Text } from "office-ui-fabric-react/lib/Text";
 

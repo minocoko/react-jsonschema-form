@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { utils } from '@rjsf/core';
+import { utils } from '@minocoko/rjsf-core';
 import { Button, Col, Row } from 'antd';
 
 const { pad, parseDateString, toDateString } = utils;

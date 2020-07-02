@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import _ from 'lodash';
 
-import { utils } from '@rjsf/core';
+import { utils } from '@minocoko/rjsf-core';
 import { Button, Col, Row } from 'antd';
 import { withConfigConsumer } from 'antd/lib/config-provider/context';
 import { PlusCircleOutlined } from '@ant-design/icons';
