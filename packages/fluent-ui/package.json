@@ -1,6 +1,6 @@
 {
   "name": "@minocoko/rjsf-fluent-ui",
-  "version": "2.2.0",
+  "version": "2.2.1-beta.8",
   "main": "dist/index.js",
   "module": "dist/rjsf-fluent-ui.esm.js",
   "typings": "dist/index.d.ts",
